@@ -1,28 +1,46 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 class TrainConsistManagementApp {
 
-    public static void main(String[] args) {
+    // Bogie Class
+    static class Bogie {
+        String name;
+        int capacity;
 
-        System.out.println("==== UC6 - Bogie Capacity Mapping ====");
-
-        // Step 1: Create HashMap
-        HashMap<String, Integer> bogieCapacity = new HashMap<>();
-
-        // Step 2: Insert bogie-capacity pairs
-        bogieCapacity.put("Sleeper", 72);
-        bogieCapacity.put("AC Chair", 60);
-        bogieCapacity.put("First Class", 40);
-
-        // Step 3: Display capacity details
-        System.out.println("\nBogie Capacity Details:");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
         }
 
-        System.out.println("\nUC6 operations completed successfully...");
+        @Override
+        public String toString() {
+            return name + " (Capacity: " + capacity + ")";
+        }
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println("==== UC7 - Sorting Bogies by Capacity ====");
+
+        // Step 1: Create List
+        List<Bogie> bogies = new ArrayList<>();
+
+        // Step 2: Add bogies
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("First Class", 40));
+
+        System.out.println("\nBefore Sorting:");
+        System.out.println(bogies);
+
+        // Step 3: Sort using Comparator
+        bogies.sort(Comparator.comparingInt(b -> b.capacity));
+
+        System.out.println("\nAfter Sorting (By Capacity):");
+        System.out.println(bogies);
+
+        System.out.println("\nUC7 operations completed successfully...");
     }
 }
