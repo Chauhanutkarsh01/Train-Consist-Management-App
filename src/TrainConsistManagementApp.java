@@ -1,47 +1,46 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 class TrainConsistManagementApp {
 
-    // Reusing Bogie model
-    static class Bogie {
-        String name;
-        int capacity;
-
-        Bogie(String name, int capacity) {
-            this.name = name;
-            this.capacity = capacity;
-        }
-    }
-
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("======================================");
-        System.out.println("UC10 - Total Seating Capacity");
+        System.out.println("UC11 - Regex Validation (User Input)");
         System.out.println("======================================\n");
 
-        // Step 1: Create list
-        List<Bogie> bogies = new ArrayList<>();
+        // Step 1: Take input
+        System.out.print("Enter Train ID (Format: TRN-1234): ");
+        String trainId = sc.nextLine();
 
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("General", 90));
+        System.out.print("Enter Cargo Code (Format: PET-AB): ");
+        String cargoCode = sc.nextLine();
 
-        // Step 2: Display bogies
-        System.out.println("Bogies:");
-        for (Bogie b : bogies) {
-            System.out.println(b.name + " -> " + b.capacity);
+        // Step 2: Define regex
+        String trainRegex = "TRN-\\d{4}";
+        String cargoRegex = "PET-[A-Z]{2}";
+
+        // Step 3: Validate using Pattern.matches
+        boolean isTrainValid = Pattern.matches(trainRegex, trainId);
+        boolean isCargoValid = Pattern.matches(cargoRegex, cargoCode);
+
+        // Step 4: Output result
+        if (isTrainValid) {
+            System.out.println("Train ID is VALID");
+        } else {
+            System.out.println("Train ID is INVALID");
         }
 
-        // Step 3: map + reduce
-        int totalCapacity = bogies.stream()
-                .map(b -> b.capacity)
-                .reduce(0, Integer::sum);
+        if (isCargoValid) {
+            System.out.println("Cargo Code is VALID");
+        } else {
+            System.out.println("Cargo Code is INVALID");
+        }
 
-        // Step 4: Display result
-        System.out.println("\nTotal Seating Capacity: " + totalCapacity);
+        System.out.println("\nUC11 validation completed...");
 
-        System.out.println("\nUC10 aggregation completed...");
+        sc.close();
     }
 }
