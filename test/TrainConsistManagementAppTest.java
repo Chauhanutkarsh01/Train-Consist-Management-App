@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class aaTrainConsistManagementAppTest {
+class TrainConsistManagementAppTest {
 
     // Reusing Bogie model
     static class Bogie {
